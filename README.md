@@ -1,10 +1,3 @@
-# Requisitos
-
-Docker 23.0.3 (Host)
-
-Docker-Compose 1.25.0 (Host)
-
-
 # Criando um servidor SQL Server com Docker-compose
 
 Neste repositório, você vai aprender como criar um servidor ***SQL Server*** utilizando ***Docker-compose***. Com o Docker-compose, é possível criar e configurar o ambiente de desenvolvimento rapidamente, facilitando o processo de desenvolvimento e evitando problemas de compatibilidade com outras versões do software.
@@ -12,6 +5,13 @@ Neste repositório, você vai aprender como criar um servidor ***SQL Server*** u
 O Docker-compose é uma ferramenta que permite gerenciar e orquestrar vários containers Docker ao mesmo tempo. Ele é usado para definir e executar aplicativos multi-container Docker. O Docker-compose usa um ***arquivo YAML*** para definir os serviços, volumes e redes necessários para cada container. Com o Docker-compose, é possível criar um ambiente de desenvolvimento completo com vários serviços, como bancos de dados, servidores de aplicativos e outros, sem precisar configurar cada um individualmente.
 
 O SQL Server em contêineres é uma forma popular de implantar e gerenciar bancos de dados SQL Server. O SQL Server é um dos sistemas de gerenciamento de banco de dados mais utilizados em todo o mundo, e a ***implantação em containers*** oferece muitos benefícios para os usuários.
+
+
+# Requisitos
+
+Docker 23.0.3 (Host)
+
+Docker-Compose 1.25.0 (Host)
 
 
 # Subindo um serviço SQL Server com Docker-compose
