@@ -14,7 +14,7 @@ Docker 23.0.3 (Host)
 Docker-Compose 1.25.0 (Host)
 
 
-# Subindo um serviço SQL Server com Docker-compose
+# Subindo um serviço SQL Server com Docker-compose (Yaml)
 
 ```yaml
 version: "3.3"
