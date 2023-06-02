@@ -9,15 +9,12 @@ services:
     ports:
       - "1433:1433"
     volumes:
-      - volume-sqlserver:/var/opt/mssql/data
-      - volume-sqlserver:/var/opt/mssql/log
-      - volume-sqlserver:/var/opt/mssql/secrets
+      - ./volumes/sqlserver/sqlserver_data:/var/opt/mssql/data
+      - ./volumes/sqlserver/sqlserver_log:/var/opt/mssql/log
+      - ./volumes/sqlserver/sqlserver_secrets:/var/opt/mssql/secrets
     restart: always
     networks:
       - rede-sqlserver
-
-volumes:
-  volume-sqlserver:
 
 networks:
   rede-sqlserver:
