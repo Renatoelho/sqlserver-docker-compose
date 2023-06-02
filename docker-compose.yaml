@@ -3,8 +3,9 @@ services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "<Crie uma Senha Forte>"
-      ACCEPT_EULA: "Y"
+      - SA_PASSWORD=20a1ad25f38e376a3725
+      - ACCEPT_EULA=Y
+      - TZ=America/Sao_Paulo
     ports:
       - "1433:1433"
     volumes:
@@ -12,7 +13,12 @@ services:
       - volume-sqlserver:/var/opt/mssql/log
       - volume-sqlserver:/var/opt/mssql/secrets
     restart: always
+    networks:
+      - rede-sqlserver
 
 volumes:
   volume-sqlserver:
-    external: true
+
+networks:
+  rede-sqlserver:
+    driver: bridge
