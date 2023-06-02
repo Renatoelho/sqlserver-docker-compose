@@ -1,6 +1,8 @@
 version: "3.3"
 services:
   sqlserver:
+    hostname: sqlserver
+    container_name: sqlserver
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       - SA_PASSWORD=20a1ad25f38e376a3725
@@ -12,6 +14,10 @@ services:
       - ./volumes/sqlserver/sqlserver_data:/var/opt/mssql/data
       - ./volumes/sqlserver/sqlserver_log:/var/opt/mssql/log
       - ./volumes/sqlserver/sqlserver_secrets:/var/opt/mssql/secrets
+    deploy:
+      resources:
+        limits:
+          memory: 2G
     restart: always
     networks:
       - rede-sqlserver
