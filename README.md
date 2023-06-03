@@ -20,21 +20,30 @@ Docker-Compose 1.25.0 (Host)
 version: "3.3"
 services:
   sqlserver:
+    hostname: sqlserver
+    container_name: sqlserver
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "<Crie uma Senha Forte>"
-      ACCEPT_EULA: "Y"
+      - SA_PASSWORD="<Crie uma Senha Forte>"
+      - ACCEPT_EULA=Y
+      - TZ=America/Sao_Paulo
     ports:
       - "1433:1433"
     volumes:
-      - volume-sqlserver:/var/opt/mssql/data
-      - volume-sqlserver:/var/opt/mssql/log
-      - volume-sqlserver:/var/opt/mssql/secrets
+      - ./volumes/sqlserver/sqlserver_data:/var/opt/mssql/data
+      - ./volumes/sqlserver/sqlserver_log:/var/opt/mssql/log
+      - ./volumes/sqlserver/sqlserver_secrets:/var/opt/mssql/secrets
+    deploy:
+      resources:
+        limits:
+          memory: 2G
     restart: always
+    networks:
+      - rede-sqlserver
 
-volumes:
-  volume-sqlserver:
-    external: true
+networks:
+  rede-sqlserver:
+    driver: bridge
 ```
 
 Esta representação YAML contém a definição de um serviço de banco de dados SQL Server.
@@ -90,6 +99,11 @@ docker-compose -f docker-compose.yaml --compatibility down
 
 > ***Atenção:*** Quando o serviço é ativo é criada uma rede exclusiva, e na desativação essa rede é deletada.
 
+> ***Atenção2:*** Depois de subir o contâiner altere as permissões do diretório dos volumes.
+
+  ```bash
+  sudo chmod -R 777 volumes/
+  ```
 
 # Referências:
 

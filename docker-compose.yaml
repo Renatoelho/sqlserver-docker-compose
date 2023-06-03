@@ -5,7 +5,7 @@ services:
     container_name: sqlserver
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      - SA_PASSWORD=20a1ad25f38e376a3725
+      - SA_PASSWORD="<Crie uma Senha Forte>"
       - ACCEPT_EULA=Y
       - TZ=America/Sao_Paulo
     ports:
