@@ -60,6 +60,7 @@ Para clonar o repositório execute o seguinte comando:
 git clone https://github.com/Renatoelho/sqlserver-docker-compose.git sqlserver-docker-compose
 ```
 
+
 ### Ativando o serviço
 
 >***IMPORTANTE***: Lembre-se de alterar o valor da variável 'SA_PASSWORD' no arquivo ```docker-compose.yaml```para uma senha complexa, para que o contêiner seja criado sem problemas e você consiga acessá-lo.
@@ -72,7 +73,6 @@ cd sqlserver-docker-compose
 docker-compose -f docker-compose.yaml --compatibility up -d
 ```
 
-> ***Atenção:*** Quando o serviço é ativo é criada uma rede exclusiva, e na desativação essa rede é deletada.
 
 ### Ajustando permissões dos volumes
 
@@ -81,6 +81,18 @@ Depois de subir o contâiner altere as permissões do diretório dos volumes.
 ```bash
 sudo chmod -R 777 volumes/
 ```
+
+
+### Acessando o SQL Server
+
+|Parâmetro         |Valor         |
+|------------------|--------------|
+|Usuário           |SA|
+|Senha             |\<Sua Senha Forte\>|
+|Database          |master|
+|Host              |localhost|
+|Porta             |1433|
+
 
 ### Desativando o serviço
 
