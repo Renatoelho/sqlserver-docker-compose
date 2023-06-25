@@ -9,12 +9,16 @@ O SQL Server em contêineres é uma forma popular de implantar e gerenciar banco
 
 # Requisitos
 
-Docker 23.0.3 (Host)
++ ![Docker](https://img.shields.io/badge/Docker-23.0.3-E3E3E3)
 
-Docker-Compose 1.25.0 (Host)
++ ![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-E3E3E3)
+
++ ![Git](https://img.shields.io/badge/Git-2.25.1%2B-E3E3E3)
+
++ ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E3E3E3)
 
 
-# Subindo um serviço SQL Server com Docker-compose (Yaml)
+# Exemplo de um arquivo YAML no Docker-compose com um serviço SQL Server
 
 ```yaml
 version: "3.3"
@@ -46,50 +50,15 @@ networks:
     driver: bridge
 ```
 
-Esta representação YAML contém a definição de um serviço de banco de dados SQL Server.
-
-Na seção ***services***, a imagem do SQL Server 2022 mais recente é usada (mcr.microsoft.com/mssql/server:2022-latest). As ***variáveis*** de ambiente são definidas para configurar o SQL Server: a senha do usuário 'SA' ***SA_PASSWORD*** e o contrato de licença ***ACCEPT_EULA***. A ***porta*** 1433 é mapeada para permitir a conexão ao SQL Server a partir de outras aplicações externas.
-
-A seção ***volumes*** define os pontos de montagem para os volumes externos que são compartilhados entre o host e o container. São usados três volumes que são nomeados como "***volume-sqlserver***" e são mapeados para as pastas ***/var/opt/mssql/data***, ***/var/opt/mssql/log*** e ***/var/opt/mssql/secrets***.
-
-Por fim, a seção ***restart*** define que o serviço será sempre reiniciado após falhas ou erros inesperados.
-
-A última seção, ***volumes***, define o nome do volume compartilhado que é referenciado na seção services. O volume volume-sqlserver é definido como um volume externo "***external: true***", o que significa que ele deve ser criado antes de executar o serviço do SQL Server.
-
-> ***Obs.:*** Crie um arquivo com esse conteúdo ou utilize o disponível no repositório.
-
-# Implementando o Serviço SQL Server
-
-#### Crie o volume no Docker
-
-```bash
-docker volume create --name=volume-sqlserver
-```
-
-
-#### Configurações no volume
-
-- Inspecione o volume criado e pegue o diretório existente em “Mountpoint”.
-
-```bash
-docker volume inspect volume-sqlserver
-```
-
-- Alterando as permissões do diretório da montagem.
-
-```bash
-sudo chmod 777 /var/lib/docker/volumes/volume-sqlserver/_data
-```
-
-> ***Obs.:*** Essa abordagem foi a opção que encontrei para evitar erros de ***permissão negada*** na ativação do serviço quando o SQL Server tenta gravar nos volumes.
-
+# Implantando o Serviço SQL Server
 
 #### Ativando o serviço
+
+>***IMPORTANTE***: Lembre-se de alterar o valor da variável 'SA_PASSWORD' no arquivo ```docker-compose.yaml```para uma senha complexa, para que o contêiner seja criado sem problemas e você consiga acessá-lo.
 
 ```bash
 docker-compose -f docker-compose.yaml --compatibility up -d
 ```
-
 
 #### Desativando o serviço
 
